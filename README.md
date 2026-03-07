@@ -15,7 +15,7 @@ Please install/confirm the following command is available (as each set to `$PATH
 - The [Bun JavaScript Runtime](https://bun.com/): confirm by the `bun` command
 - The [Z3 SMT solver (4.16.0)](https://github.com/Z3Prover/z3/releases/tag/z3-4.16.0): confirm by the `z3` command
 - The [CVC5 SMT solver (1.3.3)](https://github.com/cvc5/cvc5/releases/tag/cvc5-1.3.3): confirm by the `cvc5` command
-- The systemd support: confirm by the `systemd-run` command
+- The systemd support: confirm by the `systemd-run` command (for limiting RAM usage on solving)
 
 Additionally, the second experiment (inconsistency investigation) require [the MARCO tool](https://github.com/liffiton/marco/) to be cloned into the `$HOME` directory:
 ```shell
@@ -61,9 +61,12 @@ Extract the contents (SMT2 files) of `fmlgen/pre-gen-formulas/fml.zip` into the 
 The following steps reproduces Table 2 and Table 3 of the first experiment.
 Please confirm the current working directory is `fmlgen`, and execute the following:
 
-**Skip this step if using the pre-generated formulas.**
+**SKIP this step if using the pre-generated formulas.**
 ```shell
-sh ./gen_check.sh
+# clear previous shell files
+rm gen/z3*.sh gen/cvc*.sh
+
+./gen_check.sh
 ```
 
 This generates the SMT formulas for both encodings. 
@@ -71,7 +74,7 @@ For large bounds, there might be out-of-memory errors and please ignore them. Th
 
 After the previous command is finished, please run the following command for performing the SMT solving. **WARN: SMT solving can take hours to be fully completed.**
 ```shell
-sh ./exec_step1.sh
+./exec_step1.sh
 ```
 If it takes too long, one can separately/parallel run each line of the command in this script. 
 
@@ -91,7 +94,7 @@ Ensure the MARCO tool is already installed, and the formulas are generated from 
 Run the following command to perform MUS and MSS finding using the MARCO tool:
 
 ```shell
-sh ./exec_step2.sh
+./exec_step2.sh
 ```
 **WARN: SMT solving can take hours to be fully completed.**
 This script assumes the `MARCO` directory is cloned in `$HOME`. One may change its location manually by editing the `MARCO_EXEC` within this script. 
@@ -117,8 +120,8 @@ bun run codegen_ig.js
 Then use SMT solvers to generate instances by:
 ```shell
 cd gen
-sh ./igb.sh # generate instances for bounded formulas
-sh ./igu.sh # generate instances for unbounded formulas
+./igb.sh # generate instances for bounded formulas
+./igu.sh # generate instances for unbounded formulas
 cd .. # switch back to the fmlgen directory
 ```
 **WARN: SMT solving can take hours to be fully completed.**
