@@ -63,9 +63,6 @@ Please confirm the current working directory is `fmlgen`, and execute the follow
 
 **SKIP this step if using the pre-generated formulas.**
 ```shell
-# clear previous shell files
-rm gen/z3*.sh gen/cvc*.sh
-
 ./gen_check.sh
 ```
 
