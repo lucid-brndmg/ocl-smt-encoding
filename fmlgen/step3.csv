@@ -1,0 +1,11 @@
+id,class,10b,10u,25b,25u,50b,50u
+Group A
+CW , worker , 0.02 , 0.78 , 0.15 , 13 , 190 , 87
+CS , person , 0.20 , 18 , 3 , 4 , TO , MO
+Group B
+EHR , department , 0.02 , 1 , 0.04 , 7 , 0.08 , 201
+PERCOM , job , 0.09 , 45 , 28 , MO , TO , MO
+TRANSPORT , train , 0.02 , 0.23 , 0.04 , 4 , 0.13 , 19
+Group C
+BART , train , 0.48 , N/A , TO , N/A , TO , N/A
+RL_C , customer , 0.56 , 5 , 20 , 16 , 326 , 154
